@@ -1,0 +1,7 @@
+var countries = {
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32752" } },
+                                                                                                                                  
+"features": [
+{ "type": "Feature", "properties": { "PROV_NO": "91", "KABKOTA_NO": "04", "KEC_NO": "082", "PROVINSI": "PAPUA BARAT", "KABUPATEN": "TELUK BINTUNI", "name": "MOSKONA BARAT" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 920854.4638, 9808573.4569 ], [ 920844.7188, 9803744.8114 ], [ 916610.87150000036, 9795153.296599999 ], [ 886969.56340000033, 9795351.434699999 ], [ 888083.90670000017, 9800105.4276 ], [ 895102.50779999979, 9817186.651 ], [ 897339.73369999975, 9824566.3836 ], [ 918866.98230000027, 9824700.9452 ], [ 920862.4715, 9812634.3669 ], [ 920854.4638, 9808573.4569 ] ] ] ] } },
+{ "type": "Feature", "properties": { "PROV_NO": "91", "KABKOTA_NO": "04", "KEC_NO": "040", "PROVINSI": "PAPUA BARAT", "KABUPATEN": "TELUK BINTUNI", "name": "WAMESA" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 1062393.7576, 9750061.2426 ], [ 1052194.9853, 9750487.1191 ], [ 1052709.9768, 9751706.9327 ], [ 1051484.575, 9753953.0294 ], [ 1051263.7623, 9759256.7755 ], 

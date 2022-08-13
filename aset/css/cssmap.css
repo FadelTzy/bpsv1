@@ -1,0 +1,134 @@
+.content-wrapper{
+  background-color: #99b1ff !important
+}
+.main-sidebar{
+  height: 100%;
+  background-color: #000080 !important
+}
+/* updown fiture */
+div.simbolup{
+	position: absolute; 
+		top: 0px; right: 16px;
+
+}
+div.simboldown{
+	position: absolute; 
+	top: 0px; right: 33px;
+
+}
+div.simbolup:hover {
+	color: chartreuse;
+	cursor: pointer;
+}
+div.simboldown:hover {
+	color: red;
+	cursor: pointer;
+}
+strong.normal:hover {
+	cursor: pointer;
+	color: darkblue;
+	text-shadow: 0 0 35px rgba(0,0,0,0.7);
+}
+strong.normal{
+}
+nav.indikatormenu:hover{
+	cursor: pointer;
+
+}
+
+p.tabelnama {
+	position: relative;
+}
+
+
+/* asc - desc - norm */
+div.ascend , div.descend{
+	display: none;
+}
+.loader{
+	border: 4px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 4px solid #3498db;
+	width: 30px;
+	height: 30px;
+	animation: spin 2s linear infinite;
+	position: relative;
+		
+		
+}
+.bigloader{
+	border: 10px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 10px solid #3498db;
+	width: 60px;
+	height: 60px;
+	animation: spin 2s linear infinite;
+	position: relative;
+	left: 50%;
+		
+		
+}
+@keyframes spin{
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+
+nav.omaewa{
+	border: 0 white;position: absolute; left: 22px; top: 17px; background-color: rgba(255,255,255,0.1);
+	border-radius: 5px;
+  z-index: 1;
+}
+  li.pointers{
+    cursor: pointer;
+  }
+  .infos {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 35px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    height: 50px;
+    display: none;
+  }
+  .infos h2{
+    margin: 0 0 5px;
+    color: #777;
+  }
+  .legend{
+    background: rgba(255,255,255,0.8);
+        border-radius: 15%;
+        border: 2px solid grey;
+
+        padding-bottom: 10px;
+        width:  150px;
+          text-align: center;
+        padding-left: 5px;  
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+
+
+
+  }
+  div.centerprov {
+  margin-right: 50px;
+
+  }
+  .kab {
+    display: inline-block;
+  }
+  i.pewarnaan{
+    width: 18px;
+    height: 18px;
+    float: left;
+    opacity: 0.7;
+    z-index: 3;
+
+
+  }
+  .btnefek{
+    display: none;
+  }
+  a#printThis:hover{
+    cursor: pointer;
+  }

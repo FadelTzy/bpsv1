@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Sistem Informasi</title>
+  <script src="<?php echo base_url() ?>aset/jquery/jquery-3.4.1.min.js" ></script>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>aset/css/cssmap.css">
+  <style type="text/css">
+</style>
+  <link rel="stylesheet" href="<?php echo base_url()?>aset/lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?php echo base_url()?>aset/lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="<?php echo base_url()?>aset/lte/plugins/jqvmap/jqvmap.min.css">
+      <link rel="stylesheet" href="<?php echo base_url()?>aset/lte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>aset/lte/plugins/toastr/toastr.min.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>aset/lte/plugins/pace-progress/themes/black/pace-theme-flat-top.css">
+
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?php echo base_url()?>aset/lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <!-- summernote -->
+  <link rel="stylesheet" href="<?php echo base_url()?>aset/lte/plugins/summernote/summernote-bs4.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo base_url()?>aset/lte/plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo base_url()?>aset/lte/dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>aset/leaflet/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>aset/leaflet/label/leaflet.label.css">
+    <script  src="<?php echo base_url() ?>aset/leaflet/label/leaflet.label.js"></script>
+        <script  src="<?php echo base_url() ?>aset/leaflet/label/leaflet.label-src.js"></script>
+  <link rel="stylesheet" href="<?php echo base_url()?>aset/lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+
+<script src="<?php echo base_url() ?>aset/leaflet/leaflet.js"></script>
+<script src="<?php echo base_url() ?>aset/leaflet/leaflet-src.js"></script>
+<script src="<?php echo base_url() ?>aset/map/sulselbps.geojson"></script>
+  <script src="<?php echo base_url()?>aset/leaflet/plug/control/Permalink.js"></script>
+  <script src="<?php echo base_url()?>aset/leaflet/plug/control/Permalink.Marker.js"></script>
+  <script src="<?php echo base_url()?>aset/leaflet/plug/control/Permalink.Layer.js"></script>
+  <script src="<?php echo base_url()?>aset/leaflet/plug/control/Permalink.Overlay.js"></script>
+  <script src="<?php echo base_url()?>aset/leaflet/leaflet-button-master/L.Control.Button.js"></script>
+
+</head>
+
+<body class="hold-transition sidebar-mini ">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light omaewa">
+    <!-- Left navbar links -->
+    <ul style="background-color: rgba(255,255,255,0.1);" class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+ 
+  </nav>
+
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="position: fixed;">
+    <!-- Brand Logo -->
+   
+    <a href="<?php echo base_url()?>index.php/Ujicoba/index" class="brand-link elevation-4 " style="">
+           <img src="<?php echo base_url()?>aset/bps.png"
+           alt="bps"
+           class="brand-image img-circle elevation-5"
+           style="opacity: .9; margin-left: 5px;">
+            <div class="brand-text font-weight-light" style="font: italic; margin-top: -14px;"><i style="font-size: 15px; padding-top: -100px; letter-spacing: 1px;"> Badan Pusat Statistik <div style="padding-left: 55px; letter-spacing: 0px; margin-top: -5px;">Provinsi Sulawesi Selatan</div></i> </div>
+    </a>
+
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-12 d-flex" style="justify-content: center;">
+        <div class="image" style="" >
+          <img src="<?php echo base_url()?>aset/iconadmin.png" class="img-circle elevation-4" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block"><strong> <i> Welcome</i>,</strong> <span><?php if (isset($_SESSION['otentikasi'])) {
+        echo $_SESSION['username'];        
+   }else{ echo "Guest";}  ?></span> </a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2 indikatormenu">
+        <ul class="nav nav-pills nav-sidebar flex-column"   data-widget="treeview" role="menu" data-accordion="false"   >
+                   
+          <li class="nav-header">Data Informasi</li>
+
+          <div class="" style="overflow-y: auto; height: 200px"> 
+
+            <?php foreach ($pertama->result() as $key) : ?>
+          <li class="nav-item indikatormenu nav-link "   id="<?php echo $key->id ?>" menu="<?php echo $key->menuindikator ?>" >
+            <a  class="" >
+              <i class="nav-icon fas fa-home"></i>
+              <p class="p" style="color: white; font-size: 15px;">
+               <?php echo $key->menuindikator ?>
+              </p>
+            </a>
+          </li>
+            <?php endforeach; ?>
+                    </div>
+
+            <?php if (isset($_SESSION['otentikasi'])) { ?>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Kelola Menu Indikator
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item  tambahindikator nav-link  " data-toggle="modal" data-target="#modal-tambah-sm">
+                <a  class="" >
+                  <i class="nav-icon fas fa-plus"></i>
+                  <p class="p" style="color: white; font-size: 15px;">
+                    Tambah Indikator
+                  </p>
+                </a>
+              </li>
+                <li class="nav-item  editindikator nav-link  " data-toggle="modal" data-target="#modal-edit-sm">
+                <a  class="" >
+                  <i class="nav-icon fas fa-edit"></i>
+                  <p class="p" style="color: white; font-size: 15px;">
+                    Edit Indikator
+                  </p>
+                </a>
+              </li>
+                <li class="nav-item  hapusindikator nav-link  " data-toggle="modal" data-target="#modal-hapus-sm">
+                <a  class="" >
+                  <i class="nav-icon fas fa-trash"></i>
+                  <p class="p" style="color: white; font-size: 15px;">
+                    Hapus Indikator
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li>      
+        
+
+
+
+             <?php } ?>
+          <?php 
+          if (!isset($_SESSION['otentikasi'])) { ?>
+          
+           <li class="nav-item has-treeview"  style ="text-align: center ; position: relative; bottom: 0" > <br> <br>
+          
+                          <button type="button" class="btn btn-app" data-toggle="modal" data-target="#modal-sm">
+                           
+                            <i class="fas fa-user"></i> Login                      
+                          </button>    </li>
+        <?php }else{ ?>
+  
+           <li class="nav-item has-treeview"  style ="text-align: center ; position: relative; bottom: 0; display: inline-block;" > <br> <br>
+          
+                          <button type="button" class="btn btn-app logout" >
+                           
+                            <i class="fas fa-users"></i> Log-Out                      
+                          </button>    </li>
+        <?php } ?>
+     
+        </ul>
+
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+    <section class="content">
+      <div class="container-fluid">
+        <div class="col-15">
+            <!-- Default box -->
+            <div class="card">
+              <div class="card-header" style="text-align: center;">
+                <h1 class="" align="" style="font-size: 50px">Sistem Informasi Geografis<h3 style="font-size: 35px"><span class="judulindikatormenu" > </span> Sulawesi Selatan</h3></h1>
+                
+              </div>
+              <!-- /.card-body -->
+              <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+        </div>
+      </div>
+    </section>
+<!--/* MODALS PLIS */
+/* MODALS PLIS */
+/* MODALS PLIS */
+/* MODALS PLIS *//* MODALS PLIS */
+/* MODALS PLIS *//* MODALS PLIS */-->
+ <!-- MODAL HAPUS 3 btn-->
+      <div class="modal fade" id="modal-hapus3btn-sm">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <div>Apakah Anda Yakin..?</div>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> Tutup </button>
+              <button type="button" class="btn btn-info" no="" id="hapus3btn_button">Ya</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+ <!-- MODAL EDIT 3 btn-->
+      <div class="modal fade" id="modal-edit3btn-sm">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <form role="form">
+                <div class="card-body text-center">
+                <label for="exampleInputEmail1" class="text-center">Edit</label><br>
+
+
+                  <div class="form-group" style="text-align: left;">
+
+                  <select name="edit3btnindikator" id="edit3btnindikator" class="edit3btnindikator form-control">
+                    <option value="null" class="text-center"> -- Pilih Indikator -- </option>
+                  </select>
+                  </div>
+
+                  <div class="form-group">
+                    <input type="text" class="form-control editindikator3btntext" style="display: none;" name="editindikator3btntext" id="editindikator3btntext" placeholder="....">
+                    <input type="hidden" class="form-control" name="editindikator3btntext2" id="editindikator3btntext2" placeholder="....">
+
+                  </div>
+              
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> <div class="fa fa-times"></div></button>
+              <button type="button" class="btn btn-success edit3btn" menu="" no="" id="edit3btn_button"><div class="fa fa-edit"></div></button>
+              <button type="button" class="btn btn-info" id="done_button">Done</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+<!-- MODAL TAMBAH 3 BTN -->
+      <div class="modal fade" id="modal-tambah3btn-sm">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <form role="form">
+                <div class="card-body" style="height: 100px;">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Tambah Indikator</label>
+                    <input type="text" class="form-control" name="tambah3btnindikator" id="tambah3btnindikator" placeholder="Indikator Baru">
+                  </div>
+
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> <div class="fa fa-times"></div></button>
+              <button type="button" class="btn btn-primary tambah3btn" menu="" no="" id="tambah3btn_button"><div class="fa fa-plus"></div></button>
+              <button type="button" class="btn btn-info" id="done_button1btn">Done</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+ <!-- MODAL HAPUS 2 btn-->
+      <div class="modal fade" id="modal-hapus2btn-sm">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <div>Apakah Anda Yakin..?</div>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> Tutup </button>
+              <button type="button" class="btn btn-info" no="" id="hapus2btn_button">Ya</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+ <!-- MODAL EDIT 2 btn-->
+      <div class="modal fade" id="modal-edit2btn-sm">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <form role="form">
+                <div class="card-body text-center">
+                <label for="exampleInputEmail1" class="text-center">Edit</label><br>
+
+
+                  <div class="form-group" style="text-align: left;">
+
+                  <select name="edit2btnindikator" id="edit2btnindikator" class="edit2btnindikator form-control">
+                    <option value="null" class="text-center"> -- Pilih Indikator -- </option>
+                  </select>
+                  </div>
+
+                  <div class="form-group">
+                    <input type="text" class="form-control editindikator2btntext" style="display: none;" name="editindikator2btntext" id="editindikator2btntext" placeholder="....">
+                    <input type="hidden" class="form-control" name="editindikator2btntext2" id="editindikator2btntext2" placeholder="....">
+
+                  </div>
+              
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> <div class="fa fa-times"></div></button>
+              <button type="button" class="btn btn-success edit2btn" menu="" no="" id="edit2btn_button"><div class="fa fa-edit"></div></button>
+              <button type="button" class="btn btn-info" id="done_button">Done</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+<!-- MODAL TAMBAH 2 BTN -->
+      <div class="modal fade" id="modal-tambah2btn-sm">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <form role="form">
+                <div class="card-body" style="height: 100px;">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Tambah Indikator</label>
+                    <input type="text" class="form-control" name="tambah2btnindikator" id="tambah2btnindikator" placeholder="Indikator Baru">
+                  </div>
+
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> <div class="fa fa-times"></div></button>
+              <button type="button" class="btn btn-primary tambah2btn" menu="" no="" id="tambah2btn_button"><div class="fa fa-plus"></div></button>
+              <button type="button" class="btn btn-info" id="done_button1btn">Done</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+  
+
+
+ <!-- MODAL HAPUS 1 btn-->
+      <div class="modal fade" id="modal-hapus1btn-sm">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <div>Apakah Anda Yakin..?</div>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> Tutup </button>
+              <button type="button" class="btn btn-info" no="" id="hapus1btn_button">Ya</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+ <!-- MODAL EDIT 1 btn-->
+      <div class="modal fade" id="modal-edit1btn-sm">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <form role="form">
+                <div class="card-body text-center">
+                <label for="exampleInputEmail1" class="text-center">Edit</label><br>
+
+
+                  <div class="form-group" style="text-align: left;">
+
+                  <select name="edit1btnindikator" id="edit1btnindikator" class="edit1btnindikator form-control">
+                    <option value="null" class="text-center"> -- Pilih Indikator -- </option>
+                  </select>
+                  </div>
+
+                  <div class="form-group">
+                    <input type="text" class="form-control editindikator1btntext" style="display: none;" name="editindikator1btntext" id="editindikator1btntext" placeholder="....">
+                    <input type="hidden" class="form-control" name="editindikator1btntext2" id="editindikator1btntext2" placeholder="....">
+
+                  </div>
+              
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> <div class="fa fa-times"></div></button>
+              <button type="button" class="btn btn-success edit1btn" menu="" no="" id="edit1btn_button"><div class="fa fa-edit"></div></button>
+              <button type="button" class="btn btn-info" id="done_button">Done</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+<!-- MODAL TAMBAH 1 BTN -->
+      <div class="modal fade" id="modal-tambah1btn-sm">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <form role="form">
+                <div class="card-body" style="height: 100px;">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Tambah Indikator</label>
+                    <input type="text" class="form-control" id="tambah1btnindikator" placeholder="Indikator Baru">
+                  </div>
+
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> <div class="fa fa-times"></div></button>
+              <button type="button" class="btn btn-primary tambah1btn" menu="" no="" id="tambah1btn_button"><div class="fa fa-plus"></div></button>
+              <button type="button" class="btn btn-info" id="done_button1btn">Done</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+
+
+      <!-- MODAL EDIT -->
+      <div class="modal fade" id="modal-edit-sm">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <form role="form">
+                <div class="card-body text-center">
+                <label for="exampleInputEmail1" class="text-center">Edit Indikator</label><br>
+
+
+                  <div class="form-group" style="text-align: left;">
+
+                  <select name="editindikator" id="editindikator" class="editindikator form-control">
+                    <option disabled="true" selected="true" class="text-center"> -- Pilih Indikator -- </option>
+                      <?php foreach ($pertama->result() as $key) : ?>
+                    <option  id="<?php echo $key->id ?>" value="<?php echo $key->menuindikator ?>"><?php echo $key->menuindikator ?></option>
+                      <?php endforeach; ?>
+                  </select>
+                                    </div>
+
+                  <div class="form-group">
+                    <input type="text" class="form-control editindikatortext" style="display: none;" name="editindikatortext" id="editindikatortext" placeholder="....">
+                    <input type="hidden" class="form-control" name="editindikatortext2" id="editindikatortext2" placeholder="....">
+
+                  </div>
+              
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> <div class="fa fa-times"></div></button>
+              <button type="button" class="btn btn-success" id="edit_button"><div class="fa fa-edit"></div></button>
+              <button type="button" class="btn btn-info" id="done_button">Done</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+      <!-- MODAL TAMBAH -->
+      <div class="modal fade" id="modal-tambah-sm">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <form role="form">
+                <div class="card-body" style="height: 100px;">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Tambah Indikator</label>
+                    <input type="text" class="form-control" name="tambahindikator" id="tambahindikator" placeholder="Indikator Baru">
+                  </div>
+
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> <div class="fa fa-times"></div></button>
+              <button type="button" class="btn btn-primary" id="tambah_button"><div class="fa fa-plus"></div></button>
+              <button type="button" class="btn btn-info" id="done_button1">Done</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+
+            <!-- MODAL HAPUS -->
+      <div class="modal fade" id="modal-hapus-sm">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-body btn-default">
+              <form role="form">
+                <div class="card-body" >
+                  <div class="form-group text-center" >
+                    <label for="exampleInputEmail1">Hapus Indikator</label>
+                    <br><br>
+                    <?php foreach ($pertama->result() as $key ) :  ?>
+                      
+                    
+                    <input type="text" style="display: inline-block;" disabled="true" class="form-control  col-md-10" name="<?php echo $key->id ?>" id="<?php echo str_replace(' ', '', $key->menuindikator) ?>" value="<?php echo $key->menuindikator ?>">
+                    <span type="button" class="btn btn-danger hapus_button" name="<?php echo str_replace(' ', '', $key->menuindikator) ?>" id="<?php echo $key->id ?>"><span class="fa fa-times"></span></span><br>
+
+
+                   <?php endforeach; ?>
+
+                  </div>
+
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal"> <div class="fa fa-times"></div></button>
+              <button type="button" class="btn btn-info" id="done_button2">Done</button>
+
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+
+
+
+
+
+
+      <div class="modal fade" id="modal-sm">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header " style="border-top: 4px solid blue; border-radius: 3% ">
+               <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="<?php echo base_url()?>aset/lte/dist/img/user4-128x128.jpg"
+                       alt="User profile picture">
+                </div>
+              </div>
+
+           
+            </div>
+            <div class="modal-body btn-default">
+              <form role="form">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                  </div>
+
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between"  style="border-bottom: 3px solid blue; border-radius: 3% ">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="login_button">Login</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+          <!-- row kecamatan -->
+        <div class="col-md-12 hideindis" style="display: none">
+                     <div class="card card-primary card-outline">
+              <div class="card-header animatesampaisini">
+                <div class="row">
+ 
+              <div class="col-md-4" style="text-align: center;">
+              <div class="form-grup" >
+                <div class="col-md-12">
+
+                                  <div class="editing1 label-control" style="float: left;"> 
+<button data-toggle="modal" data-target="#modal-edit1btn-sm" class="btn btn-success btn-sm"><div class="fa fa-edit"></div></button>
+<button data-toggle="modal" data-target="#modal-tambah1btn-sm" class="btn btn-primary btn-sm"><div class="fa fa-plus"></div></button>
+<button data-toggle="modal" data-target="#modal-hapus1btn-sm"  class="btn btn-danger btn-sm" ><div class="fa fa-trash"></div></button>
+                                   </div> 
+                                   <div style="float: right;">
+<button id="tambahmap_button" style="display: none" no="" class="btn btn-warning btn-sm" style="float: right;"> Create </button>
+<button id="updatemap_button" style="display: none" no="" class="btn btn-info btn-sm"  style="float: right;"> Update </button>
+                                   </div>
+
+                </div>
+                <div class="">
+                  <select name="subkategori" class="subkategori form-control">
+                    <option value="gkada">PILIH</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                                <label class="loader label-control"  id="loading"></label>
+
+                </div>
+                  </div>
+                  <div class="col-md-4" style="text-align: center;">
+              <div class="form-grup">
+               <div class="col-md-12">
+<div class="editing2 label-control"  style="float: left;">
+ <button data-toggle="modal" data-target="#modal-edit2btn-sm" class="btn btn-success btn-sm" id=""><div class="fa fa-edit"></div></button>
+ <button data-toggle="modal" data-target="#modal-tambah2btn-sm" class="btn btn-primary btn-sm" id=""><div class="fa fa-plus"></div></button>
+ <button data-toggle="modal" data-target="#modal-hapus2btn-sm" class="btn btn-danger btn-sm" id=""><div class="fa fa-trash"></div></button> 
+</div>
+                                   <div style="float: right;">
+<button id="tambah2map_button" style="display: none" no="" class="btn btn-warning btn-sm" style="float: right;"> Create </button>
+<button id="update2map_button" style="display: none" no="" class="btn btn-info btn-sm"  style="float: right;"> Update </button>
+                                   </div>
+
+              </div>
+                <div class="">
+                  <select name="subsubkategori" class="subsubkategori form-control">
+                    <option value="0">PILIH</option>
+                  </select>
+                </div>
+              </div>
+                                <label class="loader  label-control" id="loading2"></label>
+
+                  </div>
+
+
+                  <div class="col-md-4" style="text-align: center;">
+              <div class="form-grup">
+               <div class="col-md-12">
+                               <div class="editing3 label-control"  style="float: left;">
+ <button data-toggle="modal" data-target="#modal-edit3btn-sm" class="btn btn-success btn-sm" id=""><div class="fa fa-edit"></div></button>
+ <button data-toggle="modal" data-target="#modal-tambah3btn-sm" class="btn btn-primary btn-sm" id=""><div class="fa fa-plus"></div></button>
+ <button data-toggle="modal" data-target="#modal-hapus3btn-sm" class="btn btn-danger btn-sm" id=""><div class="fa fa-trash"></div></button>
+                               </div>
+                                   <div style="float: right;">
+<button id="tambah3map_button" style="display: none" no="" class="btn btn-warning btn-sm" style="float: right;"> Create </button>
+<button id="update3map_button" style="display: none" no="" class="btn btn-info btn-sm"  style="float: right;"> Update </button>
+                                   </div>                               
+
+
+              </div>
+                <div class="">
+                  <select name="subsubsubkategori" class="subsubsubkategori form-control">
+                    <option value="0">PILIH</option>
+                  </select>
+                </div>
+              </div>
+                                <label class="loader" id="loading4"></label>
+
+                  </div>
+                </div><!-- <--class row-->
+              </div>
+
+            </div>
+        </div>  
+<div class="col-md-12" style="text-align: center; justify-content: center;">
+        <p class="" id="loading3"></p>
+</div>
+        <div class="row" id="switch">
+
+        </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <!-- Default box -->
+            <div class="card podeshome">
+
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+   <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+      <i class="fas fa-chevron-up"></i>
+    </a>
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.0.0-rc.5
+    </div>
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">f@del_af-AdminLTE.io</a>.</strong> All rights
+    reserved.
+  </footer>
+
+        <div class="btnefek">
+                 <button  class="swalDefaultError">
+                </button>
+                <button    class=" swalDefaultWarning">
+                </button>
+                <button   class=" swalDefaultSuccess">
+                </button>
+                <button   class="swalDefaultQuestion">
+                </button>
+                  <button  class="toastrDefaultSuccess">
+                </button>
+                <button class="toastrDefaultError"> </button>
+              </div>
+
+
+
+  <script type="text/javascript"> 
+
+  $(document).ready(function () {
+
+
+
+ /* create maps btn 1 */
+ $("#tambahmap_button").click(function () {
+    alert($(this).attr("no"));
+ });   
+/* hapus indikator 1-2*/
+$("#hapus3btn_button").click(function () {
+  var no = $(this).attr("no");
+  if (no != 0) {
+  $.ajax({
+    url : "<?php echo base_url()?>index.php/Editindikator1/hapus3",
+    method : "POST",
+    data : {nonya : no},
+    success : function (data) {
+      location.reload();
+         $(".toastrDefaultSuccess").click();
+    },
+    error : function (xhr , ajaxOptions ,thrownError) {
+         $(".toastrDefaultError").click();
+
+    }
+  });
+}
+});
+$("#hapus2btn_button").click(function () {
+  var no = $(this).attr("no");
+  if (no != 0) {
+  $.ajax({
+    url : "<?php echo base_url()?>index.php/Editindikator1/hapus2",
+    method : "POST",
+    data : {nonya : no},
+    success : function (data) {
+      location.reload();
+         $(".toastrDefaultSuccess").click();
+    },
+    error : function (xhr , ajaxOptions ,thrownError) {
+         $(".toastrDefaultError").click();
+
+    }
+  });
+}
+});
+$("#hapus1btn_button").click(function () {
+  var no = $(this).attr("no");
+  if (no != 0) {
+  $.ajax({
+    url : "<?php echo base_url()?>index.php/Editindikator1/hapus",
+    method : "POST",
+    data : {nonya : no},
+    success : function (data) {
+      location.reload();
+         $(".toastrDefaultSuccess").click();
+    },
+    error : function (xhr , ajaxOptions ,thrownError) {
+         $(".toastrDefaultError").click();
+
+    }
+  });
+}
+});
+
+/* edit indikator 1-2 */
+$("#edit3btn_button").click(function () {
+        var indikatoredit = $("#editindikator3btntext").val();
+       var indikatorasli = $("#editindikator3btntext2").val();
+
+       if (indikatoredit != '' && indikatorasli != null) {
+       $.ajax({
+          url : "<?php echo base_url()?>index.php/Editindikator1/editindikator3",
+          method : "POST",
+          data : {indedit : indikatoredit, indasli : indikatorasli},
+          success : function (data) {
+                          var x = null;
+        $("#editindikator3btntext").val(x);
+         $(".toastrDefaultSuccess").click();
+
+          }
+       });
+     }else{
+                       $(".toastrDefaultError").click();
+
+     }
+});
+$(".edit3btnindikator").change(function () {
+  var nama = $(this).val();
+        $(".editindikator3btntext").show();
+        $("#editindikator3btntext").val(nama);
+        $("#editindikator3btntext2").val(nama);
+});
+$("#edit2btn_button").click(function () {
+        var indikatoredit = $("#editindikator2btntext").val();
+       var indikatorasli = $("#editindikator2btntext2").val();
+
+       if (indikatoredit != '' && indikatorasli != null) {
+       $.ajax({
+          url : "<?php echo base_url()?>index.php/Editindikator1/editindikator2",
+          method : "POST",
+          data : {indedit : indikatoredit, indasli : indikatorasli},
+          success : function (data) {
+                          var x = null;
+        $("#editindikator2btntext").val(x);
+         $(".toastrDefaultSuccess").click();
+
+          }
+       });
+     }else{
+                       $(".toastrDefaultError").click();
+
+     }
+});
+$(".edit2btnindikator").change(function () {
+  var nama = $(this).val();
+        $(".editindikator2btntext").show();
+        $("#editindikator2btntext").val(nama);
+        $("#editindikator2btntext2").val(nama);
+});
+$("#edit1btn_button").click(function () {
+       var indikatoredit = $("#editindikator1btntext").val();
+       var indikatorasli = $("#editindikator1btntext2").val();
+
+       if (indikatoredit != '' && indikatorasli != null) {
+       $.ajax({
+          url : "<?php echo base_url()?>index.php/Editindikator1/editindikator",
+          method : "POST",
+          data : {indedit : indikatoredit, indasli : indikatorasli},
+          success : function (data) {
+                          var x = null;
+        $("#editindikator1btntext").val(x);
+         $(".toastrDefaultSuccess").click();
+
+          }
+       });
+     }else{
+                       $(".toastrDefaultError").click();
+
+     }
+});
+$(".edit1btnindikator").change(function () {
+  var nama = $(this).val();
+        $(".editindikator1btntext").show();
+        $("#editindikator1btntext").val(nama);
+        $("#editindikator1btntext2").val(nama);
+});
+
+/* tambah indikator 1-2-3 */
+$("#tambah3btn_button").click(function () {
+    var indikatorbaru = $("#tambah3btnindikator").val();
+    var nomenu = $(this).attr("no");
+    if (indikatorbaru != '' && indikatorbaru != null) {
+    $.ajax({
+      url : "<?php echo base_url()?>index.php/Editindikator1/tambahindikator3",
+      method : "POST",
+      data : {parentno : nomenu , indikator : indikatorbaru },
+      success : function (data) {
+                      var x = null;
+              $("#tambah3btnindikator").val(x);
+                       $(".toastrDefaultSuccess").click();
+      }
+    });
+  }else{
+                       $(".toastrDefaultError").click();
+
+     }
+});
+$("#tambah2btn_button").click(function () {
+    var indikatorbaru = $("#tambah2btnindikator").val();
+    var nomenu = $(this).attr("no");
+    if (indikatorbaru != '' && indikatorbaru != null) {
+    $.ajax({
+      url : "<?php echo base_url()?>index.php/Editindikator1/tambahindikator2",
+      method : "POST",
+      data : {parentno : nomenu , indikator : indikatorbaru },
+      success : function (data) {
+                      var x = null;
+              $("#tambah2btnindikator").val(x);
+                       $(".toastrDefaultSuccess").click();
+      }
+    });
+  }else{
+                       $(".toastrDefaultError").click();
+
+     }
+});
+$("#tambah1btn_button").click(function () {
+    var indikatorbaru = $("#tambah1btnindikator").val();
+    var nomenu = $(this).attr("no");
+    if (indikatorbaru != '' && indikatorbaru != null) {
+    $.ajax({
+      url : "<?php echo base_url()?>index.php/Editindikator1/tambahindikator",
+      method : "POST",
+      data : {parentno : nomenu , indikator : indikatorbaru },
+      success : function (data) {
+                      var x = null;
+              $("#tambah1btnindikator").val(x);
+                       $(".toastrDefaultSuccess").click();
+      }
+    });
+  }else{
+                       $(".toastrDefaultError").click();
+
+     }
+});
+
+
+ /* tombol edit indikator menu */
+     $(".editindikator").change(function () {
+        var nama = $(this).val();
+        $(".editindikatortext").show();
+        $("#editindikatortext").val(nama);
+        $("#editindikatortext2").val(nama);
+
+     });
+     $("#edit_button").click(function () {
+       var indikatoredit = $("#editindikatortext").val();
+       var indikatorasli = $("#editindikatortext2").val();
+       if (indikatoredit != '' && indikatorasli != "null") {
+       $.ajax({
+          url : "<?php echo base_url()?>index.php/Editindikatormenu/editindikator",
+          method : "POST",
+          data : {indedit : indikatoredit, indasli : indikatorasli},
+          success : function (data) {
+                          var x = null;
+        $("#editindikatortext").val(x);
+         $(".toastrDefaultSuccess").click();
+
+          }
+       });
+     }else{
+                       $(".toastrDefaultError").click();
+
+     }
+    
+
+     });
+
+/*tombol tambah indikator menu */
+    $("#tambah_button").click(function () {
+      var indikatorbaru = $("#tambahindikator").val();
+      if (indikatorbaru != '' && indikatorbaru != null) {
+      $.ajax({
+        url : "<?php echo base_url()?>index.php/Editindikatormenu/tambahindikator",
+        method : "POST",
+        data : {indikatormenu : indikatorbaru},
+        success : function (data) {
+              var x = null;
+              $("#tambahindikator").val(x);
+                       $(".toastrDefaultSuccess").click();
+
+        }
+      });
+    }else{
+                       $(".toastrDefaultError").click();
+
+     }
+    });
+    $("#done_button,#done_button1,#done_button2,#done_button1btn").click(function () {
+      location.reload();
+    });
+
+    /* Hapus Indikator BTN */
+    $(".hapus_button").click(function () {
+        var hapus = $(this).attr("id");
+        var name = $(this).attr("name");
+        
+        $('input#'+name+'').hide().attr("name");
+
+       
+        $(this).hide().attr("id");
+        $.ajax({
+          url : "<?php echo base_url()?>index.php/Editindikatormenu/hapus",
+          method : "POST",
+          data : {hapusindikator : hapus},
+          success : function (data) {
+                 $(".toastrDefaultSuccess").click();
+
+          }
+        });
+    });
+    /* Login */
+
+    $("#login_button").click(function () {
+    var usernamee = $("#username").val();
+    var passwordd = $("#password").val();
+    if (usernamee != '' && passwordd != '' ) {
+      $.ajax({
+        url : "<?php echo base_url()?>index.php/login/action",
+        method : "POST",
+        data : {username : usernamee , password : passwordd},
+        success : function (data) {
+       
+          if (data == 'no') {
+            $(".swalDefaultError").click();
+          }
+          if (data == 'hm') {
+          $(".swalDefaultWarning").click();
+          }
+          if (data == 'yes') {
+         $(".swalDefaultSuccess").click();
+         location.reload();
+
+          }
+        }
+      });
+    }else{
+         $(".swalDefaultQuestion").click();
+
+    }   
+    });
+
+
+    /* /login */
+
+    /*logout*/
+    $(".logout").click(function () {
+      $.ajax({
+        url : "<?php echo base_url()?>index.php/login/logout",
+        success : function () {
+          location.reload();
+        }
+      });
+    })
+
+
+          $("html,body").animate({scrollTop: $("body").offset().top},500);
+
+      $("#loading").hide();
+      $("#loading2").hide();
+      $("#loading4").hide();
+            '<?php if (!isset($_SESSION['otentikasi'])) { ?>'  
+      $(".editing1").hide();
+      $(".editing2").hide();
+      $(".editing3").hide();
+
+         '<?php }   ?>'
+
+
+
+
+                                            $("#tambahmap_button").hide();
+
+    
+/* Indikator Utamnya */
+    $('li.indikatormenu').click(function () {
+                                            '<?php if (isset($_SESSION['otentikasi'])) { ?>'  
+      $("#updatemap_button").hide();
+      $("#tambahmap_button").hide();
+      $("#tambah2map_button").hide();
+      $("#update2map_button").hide();
+      $("#tambah3map_button").hide();
+      $("#update3map_button").hide();
+         $("#switch").hide();       
+                                            '<?php } ?>'
+
+                                                            $("div.hideindis").slideDown("slow");
+                                                                    $(".subsubkategori").hide();
+                                                                    $(".subsubsubkategori").hide();
+      $(".editing2").hide();
+      $(".editing3").hide();
+
+                                                            $("#loading").show();
+                                                        
+                                                          var id = $(this).attr("id");
+                                                          var menu = $(this).attr("menu");
+                                                          $(".tambah1btn").attr("no",id);
+                                                          $("span.judulindikatormenu").html(menu);
+
+                                                                    $("li").removeClass("active");
+
+                                                            $("li[id="+id+"]").addClass("active");
+
+
+
+                                                          $.ajax({
+                                                            url: "<?php echo base_url(); ?>index.php/Ujicoba/get_subget2",
+                                                            method: "POST",
+                                                            data: {id:id},
+                                                            async: false,
+                                                            dataType: 'json',
+                                                            success: function (data) {
+                                                                    $("#loading").hide();
+                                                                  var html = '<option disabled="true" selected="true"> Pilih Indikator </option>';
+                                                                  var edit1btn =  '<option disabled="true" selected="true"> Pilih Indikator </option>';
+                                                                  var i;
+                                                                  for ( i = 0; i < data.length; i++) {
+                                                                    html += '<option value="'+data[i].no+'">'+data[i].indikator+'</option>';
+                                                                    edit1btn += '<option value="'+data[i].indikator+'">'+data[i].indikator+'</option>';
+                                                                  
+                                                                     
+                                                                  }
+                                 
+                                                                  $('.subkategori').html(html).show();
+                                                                  $('.edit1btnindikator').html(edit1btn);
+
+                                                            }
+                                                          });
+    });
+
+/* Indikator PErtama */
+    $(".subkategori").change(function () {
+      $("#tambah2map_button").hide();
+      $("#update2map_button").hide();
+      $("#tambah3map_button").hide();
+      $("#update3map_button").hide();
+      $(".editing3").hide();
+
+      $(".subsubsubkategori").hide();
+
+
+                                      $("#loading2").show();
+                                    var no = $(this).val();
+                                                          $(".tambah2btn").attr("no",no);
+                          '<?php if (!isset($_SESSION['otentikasi'])) { ?>'  
+                                    $.ajax({
+                                        url : "<?php echo base_url()?>index.php/Check/subkategori",
+                                        method : "POST",
+                                        data : {no : no},
+                                        success : function (data) {
+               
+                                          if (data == 'x') {
+                                      $(".subsubkategori").hide();
+                                      $("#switch").show();
+
+                                          }
+                                          if (data == 'y') {
+
+                                      $(".subsubkategori").show();
+                                           
+                                          }
+                                          if (data == 'z') {
+                                      $(".subsubkategori").hide();   
+
+                                          }
+                                        }
+                    
+                                    });
+                                  '<?php } ?>'  
+
+                        '<?php if (isset($_SESSION['otentikasi'])) { ?>'  
+                                    $.ajax({
+                                        url : "<?php echo base_url()?>index.php/Check/subkategori",
+                                        method : "POST",
+                                        data : {no : no},
+                                        success : function (data) {
+               
+                                          if (data == 'x') {
+                                      $(".editing2").hide();
+                                      $(".subsubkategori").hide();
+                                      $("#tambahmap_button").hide();
+                                      $("#updatemap_button").show();
+                                      $("#switch").show();
+
+                                          }
+                                          if (data == 'y') {
+                                            $(".editing2").show();
+
+                                             $("#updatemap_button").hide();
+                                      $(".subsubkategori").show();
+
+                                            $("#tambahmap_button").hide();
+                                                                             $("#switch").hide();
+                                           
+                                          }
+                                          if (data == 'z') {
+                                            $(".editing2").show();
+                                      $(".subsubkategori").hide();
+
+                                            $("#tambahmap_button").show();
+                                            $("#updatemap_button").hide();
+                                            $("#tambahmap_button").attr("no",no);
+
+
+                                                                             $("#switch").hide();
+
+                                          }
+                                        }
+                    
+                                    });
+                                  '<?php } ?>'  
+
+                                    $("#hapus1btn_button").attr("no",no)
+                                            $.ajax({
+                                                url : "<?php echo base_url() ?>index.php/Ujicoba/get_subget3",
+                                                method : "POST",
+                                                data : {no : no},
+                                                async : false,
+                                                dataType: 'json',
+                                                success : function (data) {
+
+                                                  if (Array.isArray(data)) {
+
+
+                                                  $("#loading2").hide();
+                                                  var edit2btn ='<option disabled="true" selected="true"> Pilih Indikator </option>';
+                                                  var htmll = '<option disabled="true" selected="true"> Pilih Indikator </option>';
+                                                  var j;
+                                                  for (j = 0; j < data.length; j++) {
+                                                    htmll += '<option value="'+data[j].idsubindikator+'">'+data[j].subindikatorlist+'</option>';
+                                                    edit2btn += '<option value="'+data[j].subindikatorlist+'">'+data[j].subindikatorlist+'</option>';
+                                                  }
+                                                  $('.subsubkategori').html(htmll);
+                                                  $('.edit2btnindikator').html(edit2btn);
+
+
+                                                  
+
+                                                  }
+                             
+
+
+                                                },
+                                                error : function (xhr , ajaxOptions ,thrownError) {
+
+
+                                                }
+                         
+                                            });
+    });
+
+
+    $(".subsubkategori").change(function () {
+            $("#tambah3map_button").hide();
+      $("#update3map_button").hide();
+                                $(".subsubsubkategori").hide();
+                                $("#loading4").show();
+
+
+          var idsubindikator = $(this).val();
+          $("#hapus2btn_button").attr("no",idsubindikator)
+         $(".tambah3btn").attr("no",idsubindikator);
+
+                        '<?php if (!isset($_SESSION['otentikasi'])) { ?>'  
+                                    $.ajax({
+                                        url : "<?php echo base_url()?>index.php/Check/subsubkategori",
+                                        method : "POST",
+                                        data : {no : idsubindikator},
+                                        success : function (data) {
+                                          if (data == 'x') {
+                                          $(".subsubsubkategori").hide();    
+                                          $("#switch").show();
+
+                                          }
+                                          if (data == 'y') {
+                                          $(".subsubsubkategori").show();    
+  
+                                           
+                                          }
+                                          if (data == 'z') {
+                                          $(".subsubsubkategori").hide();    
+
+                                          }
+                                        }
+                                    });
+                                  '<?php } ?>' 
+                        '<?php if (isset($_SESSION['otentikasi'])) { ?>'  
+                                    $.ajax({
+                                        url : "<?php echo base_url()?>index.php/Check/subsubkategori",
+                                        method : "POST",
+                                        data : {no : idsubindikator},
+                                        success : function (data) {
+                                           if (data == 'x') {
+                                            $(".editing3").hide();
+                                            $(".subsubsubkategori").hide();    
+                                            $("#tambah2map_button").hide();
+                                            $("#update2map_button").show();
+                                            $("#switch").show();
+
+                                          }
+                                          if (data == 'y') {
+                                            $(".editing3").show();
+                                            $("#update2map_button").hide();
+                                            $(".subsubsubkategori").show();    
+                                            $("#tambah2map_button").hide();
+                                            $("#switch").hide();
+                                           
+                                          }
+
+                                          if (data == 'z') {
+                                            $(".editing3").show();
+                                            $(".subsubsubkategori").hide();    
+                                            $("#tambah2map_button").show();
+                                            $("#update2map_button").hide();
+                                            $("#tambah2map_button").attr("no",idsubindikator);
+                                            $("#switch").hide();
+
+                                          }
+                                        }
+                                    });
+                                  '<?php } ?>'  
+
+                                            $.ajax({
+                                                url : "<?php echo base_url() ?>index.php/Ujicoba/get_subget4",
+                                                method : "POST",
+                                                data : {no : idsubindikator},
+                                                async : false,
+                                                dataType: 'json',
+                                                success : function (data) {
+
+                                                  if (Array.isArray(data)) {
+
+                                                  $("#loading4").hide();
+                                                  var edit3btn = '<option disabled="true" selected="true"> Pilih Indikator </option>';
+                                                  var htmll = '<option  disabled="true" selected="true"> Pilih Indikator</option>';
+                                                  var j;
+                                                  for (j = 0; j < data.length; j++) {
+                                                    htmll += '<option value="'+data[j].nosubsubindikator+'">'+data[j].subsubindikatorlist+'</option>';
+                                                    edit3btn += '<option value="'+data[j].subsubindikatorlist+'">'+data[j].subsubindikatorlist+'</option>';
+                                                  }
+                                                  $('.subsubsubkategori').html(htmll);
+                                                  $('.edit3btnindikator').html(edit3btn);
+                                                }
+  
+                                                 
+
+
+                                                }              
+                                            });
+
+    });
+
+
+  
+
+    $(".subkategori").change(function () {
+       var subkategori = $(this).val();
+      $("#switch").load("<?php echo base_url() ?>index.php/Ujicoba/maps", {"names" : subkategori} );
+
+                    $(document).ajaxStart(function(){
+                       $("#loading3").addClass("bigloader");
+
+            });
+            /* Gets called when request complete */
+            $(document).ajaxComplete(function(event,request,set){
+                     $("#loading3").removeClass("bigloader");
+
+
+            });
+
+
+
+     });
+
+    $(".subsubkategori").change(function () {
+      
+      var subsubkategori = $(this).val();
+      $("#switch").load("<?php echo base_url() ?>index.php/Ujicoba/map", {"name" : subsubkategori} );
+            $(document).ajaxStart(function(){
+                       $("#loading3").addClass("bigloader");
+
+            });
+        
+            /* Gets called when request complete */
+            $(document).ajaxComplete(function(event,request,set){
+                     $("#loading3").removeClass("bigloader");
+
+            });
+
+
+    });
+
+
+
+
+    $(".subsubsubkategori").change(function () {
+      
+      var nosubsubindikator = $(this).val();
+          $("#hapus3btn_button").attr("no",nosubsubindikator);
+
+       '<?php if (isset($_SESSION['otentikasi'])) { ?>'  
+                                    $.ajax({
+                                        url : "<?php echo base_url()?>index.php/Check/subsubsubkategori",
+                                        method : "POST",
+                                        data : {no : nosubsubindikator},
+                                        success : function (data) {
+                                          if (data == 'x') {
+                                                  $("#tambah3map_button").show();
+                                                  $("#update3map_button").hide();
+                                                  $("#switch").hide();
+                                          }
+
+                                          if (data == 'y') {
+
+                                            $("#tambah3map_button").hide();
+                                            $("#update3map_button").show();
+                                            /* mas plis lah */  
+
+                                          }
+                                        }
+                                    });
+                                  '<?php } ?>'  
+
+
+
+      $("#switch").load("<?php echo base_url() ?>index.php/Ujicoba/mapss", {"no" : nosubsubindikator} );
+            $(document).ajaxStart(function(){
+                       $("#loading3").addClass("bigloader");
+
+            });
+        
+            /* Gets called when request complete */
+            $(document).ajaxComplete(function(event,request,set){
+                     $("#loading3").removeClass("bigloader");
+
+            });
+                                 $("#switch").show();
+
+
+    });
+
+
+
+    $("nav.omaewa").mouseenter(function () {
+      $(this).css("box-shadow","0 0 5px black");
+    });
+    $("nav.omaewa").mouseleave(function () {
+      $(this).css("box-shadow","0 0 0 white");
+    });
+   
+   
+
+  
+  });
+
+
+  </script>
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="<?php echo base_url() ?>aset/lte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<!-- AdminLTE App -->
+<script src="<?php echo base_url() ?>aset/lte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="<?php echo base_url() ?>aset/lte/dist/js/demo.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="<?php echo base_url() ?>aset/lte/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+
+</script>
+<!-- Bootstrap 4 -->
+<!-- ChartJS -->
+<script src="<?php echo base_url() ?>aset/lte/plugins/datatables/jquery.dataTables.js"></script>
+<script src="<?php echo base_url() ?>aset/lte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+<script src="<?php echo base_url() ?>aset/lte/plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<!-- JQVMap -->
+<script src="<?php echo base_url() ?>aset/lte/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="<?php echo base_url() ?>aset/lte/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="<?php echo base_url() ?>aset/lte/plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="<?php echo base_url() ?>aset/lte/plugins/moment/moment.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?php echo base_url() ?>aset/lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="<?php echo base_url() ?>aset/lte/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="<?php echo base_url() ?>aset/lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="<?php echo base_url() ?>aset/lte/dist/js/pages/dashboard.js"></script>
+<script src="<?php echo base_url() ?>aset/lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo base_url() ?>aset/lte/plugins/pace-progress/pace.min.js"></script>
+
+<script src="<?php echo base_url() ?>aset/lte/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="<?php echo base_url() ?>aset/lte/plugins/toastr/toastr.min.js"></script>
+
+
+<script type="text/javascript">
+  $(function() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+
+    $('.swalDefaultSuccess').click(function() {
+      Toast.fire({
+        type: 'success',
+        title: 'Berhasil Log-in.'
+      })
+    });
+    $('.swalDefaultInfo').click(function() {
+      Toast.fire({
+        type: 'info',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultError').click(function() {
+      Toast.fire({
+        type: 'error',
+        title: 'Maaf. Password yang anda masukkan salah'
+      })
+    });
+    $('.swalDefaultWarning').click(function() {
+      Toast.fire({
+        type: 'warning',
+        title: 'Username anda tidak terdaftar.'
+      })
+    });
+    $('.swalDefaultQuestion').click(function() {
+      Toast.fire({
+        type: 'question',
+        title: 'Isi username dan password anda.'
+      })
+    });
+
+    $('.toastrDefaultSuccess').click(function() {
+      toastr.success('Data berhasil tersimpan')
+    });
+    $('.toastrDefaultInfo').click(function() {
+      toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+    });
+    $('.toastrDefaultError').click(function() {
+      toastr.error('Gagal menyimpan data');
+    });
+    $('.toastrDefaultWarning').click(function() {
+      toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+    });
+
+    $('.toastsDefaultFull').click(function() {
+      $(document).Toasts('create', {
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        icon: 'fas fa-envelope fa-lg',
+      })
+    });
+    $('.toastsDefaultFullImage').click(function() {
+      $(document).Toasts('create', {
+        body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        image: '../../dist/img/user3-128x128.jpg',
+        imageAlt: 'User Picture',
+      })
+    });
+    $('.toastsDefaultSuccess').click(function() {
+      $(document).Toasts('create', {
+        class: 'bg-success', 
+        title: 'Toast Title',
+        subtitle: 'Subtitle',
+        body: 'Data berhasil tersimpan.'
+      })
+    });
+
+  });
+
+</script>
+<!-- AdminLTE for demo purposes -->
+</body>
+</html>
